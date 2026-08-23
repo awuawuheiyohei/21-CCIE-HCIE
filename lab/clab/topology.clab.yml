@@ -1,0 +1,70 @@
+name: ccie-hcie-ospf-multi-area
+
+# 拓扑：3 节点 OSPF 多区域
+#
+#       [Area 0]              [Area 1]
+#  R1 --- 10.0.12.0/30 --- R2 --- 10.0.23.0/30 --- R3
+#                                  (ABR)           |
+#                                                 | 10.0.34.0/30
+#                                                 v
+#                                              host1
+#                              (test pc, 用来验证跨区域连通性)
+
+topology:
+  nodes:
+    R1:
+      kind: linux
+      image: frrouting/frr:latest
+      labels:
+        vendor: open-source
+        area: 0
+      binds:
+        - configs/R1_frr.conf:/etc/frr/frr.conf
+        - configs/daemons:/etc/frr/daemons
+        - configs/R1_setup.sh:/root/setup.sh
+      cmd: bash -c "/root/setup.sh && /usr/lib/frr/frrinit.sh start && sleep infinity"
+
+    R2:
+      kind: linux
+      image: frrouting/frr:latest
+      labels:
+        vendor: open-source
+        role: abr
+      binds:
+        - configs/R2_frr.conf:/etc/frr/frr.conf
+        - configs/daemons:/etc/frr/daemons
+        - configs/R2_setup.sh:/root/setup.sh
+      cmd: bash -c "/root/setup.sh && /usr/lib/frr/frrinit.sh start && sleep infinity"
+
+    R3:
+      kind: linux
+      image: frrouting/frr:latest
+      labels:
+        vendor: open-source
+        area: 1
+      binds:
+        - configs/R3_frr.conf:/etc/frr/frr.conf
+        - configs/daemons:/etc/frr/daemons
+        - configs/R3_setup.sh:/root/setup.sh
+      cmd: bash -c "/root/setup.sh && /usr/lib/frr/frrinit.sh start && sleep infinity"
+
+    host1:
+      kind: linux
+      image: alpine:latest
+      labels:
+        role: test-host
+      binds:
+        - configs/host1_setup.sh:/root/setup.sh
+      cmd: bash -c "/root/setup.sh && sleep infinity"
+
+  links:
+    # R1 - R2 (Area 0)
+    - endpoints: ["R1:eth1", "R2:eth1"]
+    # R2 - R3 (Area 1)
+    - endpoints: ["R2:eth2", "R3:eth1"]
+    # R3 - host1 (Area 1 内部)
+    - endpoints: ["R3:eth2", "host1:eth1"]
+
+  defaults:
+    state:
+      up: 5
