@@ -1,0 +1,52 @@
+# 编辑器 / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+desktop.ini
+
+# 临时文件
+*.tmp
+*.bak
+*.orig
+
+# 私人和敏感文件
+*.log
+.env
+.env.local
+secrets/
+*.key
+*.pem
+
+# 大量二进制（用 Git LFS 或单独存放）
+*.pcap
+*.pcapng
+*.bin
+*.img
+*.iso
+*.ova
+*.vmdk
+*.qcow2
+*.dmg
+
+# vendor 目录（外部依赖）
+vendor/
+node_modules/
+
+# 编译产物
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.obj
+
+# 实验输出
+lab/*/output/
+lab/*/*.log
+lab/*/*.pcap
