@@ -232,7 +232,7 @@ show ip ospf neighbor
 
 | 日期 | 改动 | 作者 |
 |------|------|------|
-| 2024-07-20 | 初稿 | @yourname |
+| 2024-07-20 | 初稿 | @awuawuheiyohei |
 
 ---
 

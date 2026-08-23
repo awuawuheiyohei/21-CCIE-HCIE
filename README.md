@@ -1,5 +1,9 @@
 # 🎯 CCIE × HCIE 备考知识库
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./docs/CONTRIBUTING.md)
+[![Maintained by awuawuheiyohei](https://img.shields.io/badge/maintained%20by-@awuawuheiyohei-blue.svg)](https://github.com/awuawuheiyohei)
+
 > **双厂商对照** · **真题+模拟+知识点** · **完全开源**
 
 一个为同时备考 **CCIE**（Cisco）和 **HCIE**（Huawei）两个网络工程师顶级认证而构建的
@@ -176,8 +180,9 @@ Type-4 LSA（ASBR Summary LSA）由 **ABR** 生成，用于通告 ASBR 的位置
 
 ## 🙋 作者
 
-正在备考 CCIE / HCIE 的网络工程师。目标是做一个"自己复习时愿意看、
-别人也能复用"的知识库。如果觉得有用，欢迎 ⭐ Star 支持一下。
+[@awuawuheiyohei](https://github.com/awuawuheiyohei) —— 正在备考 CCIE / HCIE 的网络工程师。
+
+目标是做一个"自己复习时愿意看、别人也能复用"的知识库。如果觉得有用，欢迎 ⭐ Star 支持一下。
 
 ---
 

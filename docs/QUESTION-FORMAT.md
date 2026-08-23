@@ -225,8 +225,8 @@ show ip ospf neighbor
 
 | 日期 | 改动 | 作者 |
 |------|------|------|
-| 2024-07-10 | 初稿 | @yourname |
-| 2024-07-15 | 补充厂商差异表 | @yourname |
+| 2024-07-10 | 初稿 | @awuawuheiyohei |
+| 2024-07-15 | 补充厂商差异表 | @awuawuheiyohei |
 ```
 
 ---
