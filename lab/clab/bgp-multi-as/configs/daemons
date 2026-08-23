@@ -1,0 +1,25 @@
+# /etc/frr/daemons - 启用 BGP daemon
+# 与 OSPF lab 不同：禁用 ospfd，启用 bgpd
+
+zebra=yes
+ripd=no
+ripngd=no
+ospfd=no
+ospf6d=no
+bgpd=yes
+isisd=no
+pimd=no
+ldpd=no
+nhrpd=no
+eigrpd=no
+babeld=no
+sharpd=no
+staticd=yes
+pbrd=no
+bfdd=no
+fabricd=no
+vrrpd=no
+
+vtysh_enable=yes
+zebra_options="  -A 127.0.0.1 -s 90000000"
+bgpd_options="  -A 127.0.0.1"

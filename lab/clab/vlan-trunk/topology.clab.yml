@@ -1,0 +1,112 @@
+name: ccie-hcie-vlan-trunk
+
+# 拓扑：2 台 switch + 4 台 host
+#
+#   VLAN 10                                  VLAN 10
+#  +--------+  eth1     +--------+  eth24   +--------+  eth1     +--------+
+#  | host1  |----------- |        |----------|        |-----------| host3  |
+#  +--------+           |        |          |        |           +--------+
+#                       |  SW1   |  (trunk) |  SW2   |
+#  +--------+  eth2     |        |  VLAN    |        |  eth2     +--------+
+#  | host2  |-----------|        |  10,20   |        |-----------| host4  |
+#  +--------+           +--------+          +--------+           +--------+
+#   VLAN 10                                  VLAN 20
+#
+# 验证目标：
+#   1. host1 (V10) ↔ host2 (V10)    ✅ 通（同 VLAN）
+#   2. host1 (V10) ↔ host3 (V10)    ✅ 通（跨 trunk）
+#   3. host1 (V10) ↔ host4 (V20)    ❌ 不通（VLAN 隔离）
+
+topology:
+  nodes:
+    # SW1 - 2 access port (VLAN 10) + 1 trunk port
+    SW1:
+      kind: linux
+      image: alpine:latest
+      cap_add:
+        - NET_ADMIN
+      labels:
+        role: switch
+        vlan: 10,20
+      binds:
+        - configs/SW1_setup.sh:/root/setup.sh
+      cmd: bash -c "/root/setup.sh && sleep infinity"
+
+    # SW2 - 1 access port VLAN 10 + 1 access port VLAN 20 + 1 trunk
+    SW2:
+      kind: linux
+      image: alpine:latest
+      cap_add:
+        - NET_ADMIN
+      labels:
+        role: switch
+        vlan: 10,20
+      binds:
+        - configs/SW2_setup.sh:/root/setup.sh
+      cmd: bash -c "/root/setup.sh && sleep infinity"
+
+    # Host 1 - VLAN 10, 接入 SW1
+    host1:
+      kind: linux
+      image: alpine:latest
+      cap_add:
+        - NET_ADMIN
+      labels:
+        vlan: 10
+        switch: SW1
+      binds:
+        - configs/host1_setup.sh:/root/setup.sh
+      cmd: bash -c "/root/setup.sh && sleep infinity"
+
+    # Host 2 - VLAN 10, 接入 SW1
+    host2:
+      kind: linux
+      image: alpine:latest
+      cap_add:
+        - NET_ADMIN
+      labels:
+        vlan: 10
+        switch: SW1
+      binds:
+        - configs/host2_setup.sh:/root/setup.sh
+      cmd: bash -c "/root/setup.sh && sleep infinity"
+
+    # Host 3 - VLAN 10, 接入 SW2 (跨 trunk 测试)
+    host3:
+      kind: linux
+      image: alpine:latest
+      cap_add:
+        - NET_ADMIN
+      labels:
+        vlan: 10
+        switch: SW2
+      binds:
+        - configs/host3_setup.sh:/root/setup.sh
+      cmd: bash -c "/root/setup.sh && sleep infinity"
+
+    # Host 4 - VLAN 20, 接入 SW2 (VLAN 隔离测试)
+    host4:
+      kind: linux
+      image: alpine:latest
+      cap_add:
+        - NET_ADMIN
+      labels:
+        vlan: 20
+        switch: SW2
+      binds:
+        - configs/host4_setup.sh:/root/setup.sh
+      cmd: bash -c "/root/setup.sh && sleep infinity"
+
+  links:
+    # SW1 access ports
+    - endpoints: ["SW1:eth1", "host1:eth1"]   # SW1 port 1 - host1 (VLAN 10)
+    - endpoints: ["SW1:eth2", "host2:eth1"]   # SW1 port 2 - host2 (VLAN 10)
+    # Trunk
+    - endpoints: ["SW1:eth3", "SW2:eth3"]     # SW1 port 24 - SW2 port 24 (trunk)
+    # SW2 access ports
+    - endpoints: ["SW2:eth1", "host3:eth1"]   # SW2 port 1 - host3 (VLAN 10)
+    - endpoints: ["SW2:eth2", "host4:eth1"]   # SW2 port 2 - host4 (VLAN 20)
+
+  defaults:
+    state:
+      up: 5
