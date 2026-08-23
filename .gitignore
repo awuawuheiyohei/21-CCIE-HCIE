@@ -38,6 +38,12 @@ secrets/
 vendor/
 node_modules/
 
+# Python venv（本地测试用）
+.venv/
+venv/
+__pycache__/
+*.pyc
+
 # 编译产物
 *.exe
 *.dll

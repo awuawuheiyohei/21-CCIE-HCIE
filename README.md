@@ -2,6 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./docs/CONTRIBUTING.md)
+[![Lint Questions](https://github.com/awuawuheiyohei/CCIE-HCIE_Jarvis/actions/workflows/lint.yml/badge.svg)](./.github/workflows/lint.yml)
 [![Maintained by awuawuheiyohei](https://img.shields.io/badge/maintained%20by-@awuawuheiyohei-blue.svg)](https://github.com/awuawuheiyohei)
 
 > **双厂商对照** · **真题+模拟+知识点** · **完全开源**

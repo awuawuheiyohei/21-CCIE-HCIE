@@ -1,0 +1,55 @@
+name: Lint Questions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'exams/**/*.md'
+      - '.github/workflows/lint.yml'
+      - '.github/scripts/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'exams/**/*.md'
+      - '.github/workflows/lint.yml'
+      - '.github/scripts/**'
+
+# 同一分支最新的 run 自动 cancel 旧的
+concurrency:
+  group: lint-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint question front matter
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Run lint
+        run: python .github/scripts/lint_questions.py
+
+      - name: Summary
+        if: success()
+        run: echo "✅ Lint passed - all question files have valid front matter"
+
+      - name: Summary
+        if: failure()
+        run: |
+          echo "❌ Lint failed - some question files have invalid front matter"
+          echo "💡 See job output above for details"
+          echo "💡 Reference: docs/QUESTION-FORMAT.md"
+          echo "💡 Or example: exams/HCIE-RS/written/2024-07-ospf-lsa-001.md"
