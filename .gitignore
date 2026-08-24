@@ -56,3 +56,7 @@ __pycache__/
 lab/*/output/
 lab/*/*.log
 lab/*/*.pcap
+
+# Containerlab runtime artifacts
+lab/clab/clab-*/
+lab/clab/*/clab-*/

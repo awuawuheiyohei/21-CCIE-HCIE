@@ -14,46 +14,50 @@ topology:
   nodes:
     R1:
       kind: linux
-      image: frrouting/frr:latest
+      image: frrouting/frr:v8.4.1
       labels:
         vendor: open-source
         area: 0
       binds:
         - configs/R1_frr.conf:/etc/frr/frr.conf
+        - configs/vtysh.conf:/etc/frr/vtysh.conf
         - configs/daemons:/etc/frr/daemons
         - configs/R1_setup.sh:/root/setup.sh
       cmd: bash -c "/root/setup.sh && /usr/lib/frr/frrinit.sh start && sleep infinity"
 
     R2:
       kind: linux
-      image: frrouting/frr:latest
+      image: frrouting/frr:v8.4.1
       labels:
         vendor: open-source
         role: abr
       binds:
         - configs/R2_frr.conf:/etc/frr/frr.conf
+        - configs/vtysh.conf:/etc/frr/vtysh.conf
         - configs/daemons:/etc/frr/daemons
         - configs/R2_setup.sh:/root/setup.sh
       cmd: bash -c "/root/setup.sh && /usr/lib/frr/frrinit.sh start && sleep infinity"
 
     R3:
       kind: linux
-      image: frrouting/frr:latest
+      image: frrouting/frr:v8.4.1
       labels:
         vendor: open-source
         area: 1
       binds:
         - configs/R3_frr.conf:/etc/frr/frr.conf
+        - configs/vtysh.conf:/etc/frr/vtysh.conf
         - configs/daemons:/etc/frr/daemons
         - configs/R3_setup.sh:/root/setup.sh
       cmd: bash -c "/root/setup.sh && /usr/lib/frr/frrinit.sh start && sleep infinity"
 
     host1:
       kind: linux
-      image: alpine:latest
+      image: frrouting/frr:v8.4.1
       labels:
         role: test-host
       binds:
+        - configs/vtysh.conf:/etc/frr/vtysh.conf
         - configs/host1_setup.sh:/root/setup.sh
       cmd: bash -c "/root/setup.sh && sleep infinity"
 
@@ -65,6 +69,3 @@ topology:
     # R3 - host1 (Area 1 内部)
     - endpoints: ["R3:eth2", "host1:eth1"]
 
-  defaults:
-    state:
-      up: 5
