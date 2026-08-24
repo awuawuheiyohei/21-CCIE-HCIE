@@ -22,7 +22,7 @@ topology:
     # SW1 - 2 access port (VLAN 10) + 1 trunk port
     SW1:
       kind: linux
-      image: alpine:latest
+      image: frrouting/frr:v8.4.1
       cap_add:
         - NET_ADMIN
       labels:
@@ -35,7 +35,7 @@ topology:
     # SW2 - 1 access port VLAN 10 + 1 access port VLAN 20 + 1 trunk
     SW2:
       kind: linux
-      image: alpine:latest
+      image: frrouting/frr:v8.4.1
       cap_add:
         - NET_ADMIN
       labels:
@@ -48,7 +48,7 @@ topology:
     # Host 1 - VLAN 10, 接入 SW1
     host1:
       kind: linux
-      image: alpine:latest
+      image: frrouting/frr:v8.4.1
       cap_add:
         - NET_ADMIN
       labels:
@@ -61,7 +61,7 @@ topology:
     # Host 2 - VLAN 10, 接入 SW1
     host2:
       kind: linux
-      image: alpine:latest
+      image: frrouting/frr:v8.4.1
       cap_add:
         - NET_ADMIN
       labels:
@@ -74,7 +74,7 @@ topology:
     # Host 3 - VLAN 10, 接入 SW2 (跨 trunk 测试)
     host3:
       kind: linux
-      image: alpine:latest
+      image: frrouting/frr:v8.4.1
       cap_add:
         - NET_ADMIN
       labels:
@@ -87,7 +87,7 @@ topology:
     # Host 4 - VLAN 20, 接入 SW2 (VLAN 隔离测试)
     host4:
       kind: linux
-      image: alpine:latest
+      image: frrouting/frr:v8.4.1
       cap_add:
         - NET_ADMIN
       labels:
