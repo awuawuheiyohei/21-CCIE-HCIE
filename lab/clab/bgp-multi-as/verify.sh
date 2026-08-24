@@ -69,17 +69,17 @@ check "R1 learned R4's network (10.4.0.0/16) via BGP" \
     "docker exec $R1 vtysh -c 'show ip route 10.4.0.0'" \
     "bgp"
 
-check "R1 BGP path to 10.4.0.0/16 has AS_PATH 65020 65020 (iBGP + eBGP)" \
+check "R1 BGP path to 10.4.0.0/16 has AS_PATH 65020 (R4 origin via R3 transit)" \
     "docker exec $R1 vtysh -c 'show ip bgp 10.4.0.0/16'" \
-    "65020 65020"
+    "65020"
 
 check "R4 learned R1's network (10.1.0.0/16) via BGP" \
     "docker exec $R4 vtysh -c 'show ip route 10.1.0.0'" \
     "bgp"
 
-check "R4 BGP path to 10.1.0.0/16 has AS_PATH 65010 65010" \
+check "R4 BGP path to 10.1.0.0/16 has AS_PATH 65010 (R1 origin via R2 transit)" \
     "docker exec $R4 vtysh -c 'show ip bgp 10.1.0.0/16'" \
-    "65010 65010"
+    "65010"
 
 echo ""
 echo "=== 3. 跨 AS 连通性 ==="
@@ -102,9 +102,9 @@ check "R1 sees 10.2.0.0/16 with LocalPref 200 (via R2 route-map)" \
     "docker exec $R1 vtysh -c 'show ip bgp 10.2.0.0/16'" \
     "200"
 
-check "R3 sees 10.2.0.0/16 with MED 50 (R2 export route-map)" \
+check "R3 sees 10.2.0.0/16 with metric 50 (R2 export route-map)" \
     "docker exec $R3 vtysh -c 'show ip bgp 10.2.0.0/16'" \
-    "Med 50"
+    "metric 50"
 
 echo ""
 echo "=============================="
