@@ -23,8 +23,6 @@ topology:
     SW1:
       kind: linux
       image: frrouting/frr:v8.4.1
-      cap_add:
-        - NET_ADMIN
       labels:
         role: switch
         vlan: 10,20
@@ -36,8 +34,6 @@ topology:
     SW2:
       kind: linux
       image: frrouting/frr:v8.4.1
-      cap_add:
-        - NET_ADMIN
       labels:
         role: switch
         vlan: 10,20
@@ -49,8 +45,6 @@ topology:
     host1:
       kind: linux
       image: frrouting/frr:v8.4.1
-      cap_add:
-        - NET_ADMIN
       labels:
         vlan: 10
         switch: SW1
@@ -62,8 +56,6 @@ topology:
     host2:
       kind: linux
       image: frrouting/frr:v8.4.1
-      cap_add:
-        - NET_ADMIN
       labels:
         vlan: 10
         switch: SW1
@@ -75,8 +67,6 @@ topology:
     host3:
       kind: linux
       image: frrouting/frr:v8.4.1
-      cap_add:
-        - NET_ADMIN
       labels:
         vlan: 10
         switch: SW2
@@ -88,8 +78,6 @@ topology:
     host4:
       kind: linux
       image: frrouting/frr:v8.4.1
-      cap_add:
-        - NET_ADMIN
       labels:
         vlan: 20
         switch: SW2
