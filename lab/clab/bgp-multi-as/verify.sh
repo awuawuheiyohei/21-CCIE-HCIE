@@ -57,7 +57,7 @@ check "R2 has R1 (iBGP) and R3 (eBGP)" \
 
 check "R3 has R2 (eBGP) and R4 (iBGP)" \
     "docker exec $R3 vtysh -c 'show ip bgp summary'" \
-    "10.0.23.2"
+    "10.0.23.1"
 
 check "R4 has R3 as iBGP neighbor" \
     "docker exec $R4 vtysh -c 'show ip bgp summary' | grep '3.3.3.3'" \
@@ -89,7 +89,7 @@ check "R1 can ping R2" \
     "received"
 
 check "R2 can ping R3 (eBGP link)" \
-    "docker exec $R2 ping -c 2 -W 2 10.0.23.3" \
+    "docker exec $R2 ping -c 2 -W 2 10.0.23.2" \
     "received"
 
 check "R1 can ping R4 (BGP learned)" \
