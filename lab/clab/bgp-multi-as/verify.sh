@@ -104,7 +104,7 @@ check "R1 sees 10.2.0.0/16 with LocalPref 200 (via R2 route-map)" \
 
 check "R3 sees 10.2.0.0/16 with MED 50 (R2 export route-map)" \
     "docker exec $R3 vtysh -c 'show ip bgp 10.2.0.0/16'" \
-    "50"
+    "Med 50"
 
 echo ""
 echo "=============================="
