@@ -1,6 +1,5 @@
 #!/bin/bash
-# R4 - 配 IP + iBGP peer (R3) 的 loopback 路由
+# R4 - frr.conf handles 3.3.3.3 static route (via 10.0.34.3 onlink)
 sleep 2
 ip link set lo up
-ip route replace 3.3.3.3/32 via 10.0.34.3
 echo "R4 ready"
