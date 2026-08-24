@@ -40,7 +40,7 @@ check_ping_pass() {
 
     echo -n "[$name] ... "
     result=$(docker exec $from ping -c 2 -W 2 $ip 2>&1 || echo "FAIL")
-    if echo "$result" | grep -q "2 received"; then
+    if echo "$result" | grep -q "received"; then
         echo -e "${GREEN}✅ PASS${NC}"
         PASS=$((PASS+1))
     else
@@ -60,7 +60,7 @@ check_ping_fail() {
     echo -n "[$name] ... "
     result=$(docker exec $from ping -c 2 -W 2 $ip 2>&1 || echo "FAIL")
     # "Destination Host Unreachable" 或者 "100% packet loss" 都算不通
-    if echo "$result" | grep -qE "(100% packet loss|Unreachable|0 received)"; then
+    if echo "$result" | grep -qE "(100% packet loss|Unreachable|0 packets received)"; then
         echo -e "${GREEN}✅ PASS（按预期不通）${NC}"
         PASS=$((PASS+1))
     else

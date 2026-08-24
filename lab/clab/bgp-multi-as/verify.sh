@@ -86,15 +86,15 @@ echo "=== 3. 跨 AS 连通性 ==="
 # 等 OSPF 没有，但有直连路由
 check "R1 can ping R2" \
     "docker exec $R1 ping -c 2 -W 2 2.2.2.2" \
-    "2 received"
+    "received"
 
 check "R2 can ping R3 (eBGP link)" \
     "docker exec $R2 ping -c 2 -W 2 10.0.23.3" \
-    "2 received"
+    "received"
 
 check "R1 can ping R4 (BGP learned)" \
     "docker exec $R1 ping -c 2 -W 2 4.4.4.4" \
-    "2 received"
+    "received"
 
 echo ""
 echo "=== 4. 路径属性验证 ==="

@@ -30,7 +30,7 @@ topology:
         vlan: 10,20
       binds:
         - configs/SW1_setup.sh:/root/setup.sh
-      cmd: bash -c "/root/setup.sh && sleep infinity"
+      cmd: sh -c "/root/setup.sh && sleep infinity"
 
     # SW2 - 1 access port VLAN 10 + 1 access port VLAN 20 + 1 trunk
     SW2:
@@ -43,7 +43,7 @@ topology:
         vlan: 10,20
       binds:
         - configs/SW2_setup.sh:/root/setup.sh
-      cmd: bash -c "/root/setup.sh && sleep infinity"
+      cmd: sh -c "/root/setup.sh && sleep infinity"
 
     # Host 1 - VLAN 10, 接入 SW1
     host1:
@@ -56,7 +56,7 @@ topology:
         switch: SW1
       binds:
         - configs/host1_setup.sh:/root/setup.sh
-      cmd: bash -c "/root/setup.sh && sleep infinity"
+      cmd: sh -c "/root/setup.sh && sleep infinity"
 
     # Host 2 - VLAN 10, 接入 SW1
     host2:
@@ -69,7 +69,7 @@ topology:
         switch: SW1
       binds:
         - configs/host2_setup.sh:/root/setup.sh
-      cmd: bash -c "/root/setup.sh && sleep infinity"
+      cmd: sh -c "/root/setup.sh && sleep infinity"
 
     # Host 3 - VLAN 10, 接入 SW2 (跨 trunk 测试)
     host3:
@@ -82,7 +82,7 @@ topology:
         switch: SW2
       binds:
         - configs/host3_setup.sh:/root/setup.sh
-      cmd: bash -c "/root/setup.sh && sleep infinity"
+      cmd: sh -c "/root/setup.sh && sleep infinity"
 
     # Host 4 - VLAN 20, 接入 SW2 (VLAN 隔离测试)
     host4:
@@ -95,7 +95,7 @@ topology:
         switch: SW2
       binds:
         - configs/host4_setup.sh:/root/setup.sh
-      cmd: bash -c "/root/setup.sh && sleep infinity"
+      cmd: sh -c "/root/setup.sh && sleep infinity"
 
   links:
     # SW1 access ports
@@ -107,6 +107,3 @@ topology:
     - endpoints: ["SW2:eth1", "host3:eth1"]   # SW2 port 1 - host3 (VLAN 10)
     - endpoints: ["SW2:eth2", "host4:eth1"]   # SW2 port 2 - host4 (VLAN 20)
 
-  defaults:
-    state:
-      up: 5
