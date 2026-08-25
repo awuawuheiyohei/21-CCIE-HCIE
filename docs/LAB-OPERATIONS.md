@@ -1,7 +1,7 @@
 # Lab Operations Manual
 
 > How to run and verify the 3 CCIE/HCIE labs in this repo on macOS M1 + Docker Desktop.
-> Last validated: 2026-08-24 (3 labs, 23 verify.sh checks, all PASS).
+> Last validated: 2026-08-25 (3 labs, 35 verify.sh checks, all PASS).
 
 ## Labs overview
 
@@ -9,7 +9,7 @@
 |---|---|---|---|
 | **OSPF multi-area** | `lab/clab/ospf-multi-area/` | 3-router ABR (R1↔R2 ABR↔R3 + host1), Areas 0/1, ABR self-summary bug workaround | 10/10 ✅ |
 | **BGP multi-AS** | `lab/clab/bgp-multi-as/` | 2 ASes (65010 / 65020), 4 routers, eBGP + iBGP, route-map (LocalPref / MED), next-hop-self | 13/13 ✅ |
-| **VLAN / trunk** | `lab/clab/vlan-trunk/` | 2 switches + 4 hosts, access port (untagged) + trunk (tagged), VLAN 10 + VLAN 20 isolation | (VLAN lab needs testing — see Known issues §3) |
+| **VLAN / trunk** | `lab/clab/vlan-trunk/` | 2 switches + 4 hosts, access port (untagged) + trunk (tagged), VLAN 10 + VLAN 20 isolation | 12/12 ✅ |
 
 ## Prerequisites
 
