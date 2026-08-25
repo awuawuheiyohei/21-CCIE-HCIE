@@ -1,0 +1,25 @@
+# /etc/frr/daemons - 启用 OSPF daemon
+# 完整版参考: https://github.com/FRRouting/frr/blob/main/docker/daemons
+
+zebra=yes
+ripd=no
+ripngd=no
+ospfd=yes
+ospf6d=no
+bgpd=no
+isisd=no
+pimd=no
+ldpd=no
+nhrpd=no
+eigrpd=no
+babeld=no
+sharpd=no
+staticd=yes
+pbrd=no
+bfdd=no
+fabricd=no
+vrrpd=no
+
+vtysh_enable=yes
+zebra_options="  -A 127.0.0.1 -s 90000000"
+ospfd_options="  -A 127.0.0.1"

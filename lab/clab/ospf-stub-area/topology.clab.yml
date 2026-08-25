@@ -1,0 +1,76 @@
+name: ccie-hcie-ospf-stub-area
+
+# 拓扑：4 节点 OSPF Stub Area
+#
+#         10.0.12.0/30          10.0.23.0/30          10.0.34.0/30
+# R1 ───────────── R2 (ABR) ───────────── R3 (Area 1, stub) ─────────── host1
+# [Area 0]                 [A0 | A1]                 [Area 1]
+#    |
+#    └─ 10.99.0.0/16 (redistribute static → OSPF external)
+#
+# 验证目标：
+#   1. R3 路由表没有 10.99.0.0/16（Type 5 LSA 被 stub area 拦截）
+#   2. R3 路由表有 0.0.0.0/0 默认路由（ABR 注入）
+#   3. R3 仍能 ping 10.99.0.0/16（走默认路由）
+#   4. R3 不能学 inter-area 路由（totally stubby no-summary）
+#   5. R1 RIB 有 10.99.0.0/16 标记为 O E2
+
+topology:
+  nodes:
+    R1:
+      kind: linux
+      image: frrouting/frr:v8.4.1
+      labels:
+        vendor: open-source
+        area: 0
+      binds:
+        - configs/R1_frr.conf:/etc/frr/frr.conf
+        - configs/vtysh.conf:/etc/frr/vtysh.conf
+        - configs/daemons:/etc/frr/daemons
+        - configs/R1_setup.sh:/root/setup.sh
+      cmd: bash -c "/root/setup.sh && /usr/lib/frr/frrinit.sh start && sleep infinity"
+
+    R2:
+      kind: linux
+      image: frrouting/frr:v8.4.1
+      labels:
+        vendor: open-source
+        role: abr
+      binds:
+        - configs/R2_frr.conf:/etc/frr/frr.conf
+        - configs/vtysh.conf:/etc/frr/vtysh.conf
+        - configs/daemons:/etc/frr/daemons
+        - configs/R2_setup.sh:/root/setup.sh
+      cmd: bash -c "/root/setup.sh && /usr/lib/frr/frrinit.sh start && sleep infinity"
+
+    R3:
+      kind: linux
+      image: frrouting/frr:v8.4.1
+      labels:
+        vendor: open-source
+        area: 1
+        area_type: stub
+      binds:
+        - configs/R3_frr.conf:/etc/frr/frr.conf
+        - configs/vtysh.conf:/etc/frr/vtysh.conf
+        - configs/daemons:/etc/frr/daemons
+        - configs/R3_setup.sh:/root/setup.sh
+      cmd: bash -c "/root/setup.sh && /usr/lib/frr/frrinit.sh start && sleep infinity"
+
+    host1:
+      kind: linux
+      image: frrouting/frr:v8.4.1
+      labels:
+        role: test-host
+      binds:
+        - configs/vtysh.conf:/etc/frr/vtysh.conf
+        - configs/host1_setup.sh:/root/setup.sh
+      cmd: bash -c "/root/setup.sh && sleep infinity"
+
+  links:
+    # R1 - R2 (Area 0)
+    - endpoints: ["R1:eth1", "R2:eth1"]
+    # R2 - R3 (跨 Area 0/1, ABR 链路)
+    - endpoints: ["R2:eth2", "R3:eth1"]
+    # R3 - host1 (Area 1 内部)
+    - endpoints: ["R3:eth2", "host1:eth1"]
