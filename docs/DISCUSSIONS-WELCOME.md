@@ -20,10 +20,10 @@
 
 按这个顺序读：
 
-1. **[README](https://github.com/awuawuheiyohei/CCIE-HCIE_Jarvis/blob/main/README.md)** —— 5 分钟了解项目全貌
-2. **[学习路线 ROADMAP](https://github.com/awuawuheiyohei/CCIE-HCIE_Jarvis/blob/main/docs/ROADMAP.md)** —— 12-18 月拿证规划
-3. **[题目格式规范](https://github.com/awuawuheiyohei/CCIE-HCIE_Jarvis/blob/main/docs/QUESTION-FORMAT.md)** —— 理解每个文件怎么组织的
-4. **[标签体系](https://github.com/awuawuheiyohei/CCIE-HCIE_Jarvis/blob/main/docs/TAG-SYSTEM.md)** —— 学会用 tag 过滤题目
+1. **[README](https://github.com/awuawuheiyohei/21-CCIE-HCIE/blob/main/README.md)** —— 5 分钟了解项目全貌
+2. **[学习路线 ROADMAP](https://github.com/awuawuheiyohei/21-CCIE-HCIE/blob/main/docs/ROADMAP.md)** —— 12-18 月拿证规划
+3. **[题目格式规范](https://github.com/awuawuheiyohei/21-CCIE-HCIE/blob/main/docs/QUESTION-FORMAT.md)** —— 理解每个文件怎么组织的
+4. **[标签体系](https://github.com/awuawuheiyohei/21-CCIE-HCIE/blob/main/docs/TAG-SYSTEM.md)** —— 学会用 tag 过滤题目
 
 ### 找题做
 
@@ -70,7 +70,7 @@ knowledge/
 
 **第一次贡献？** 建议从"修正错别字"或"补充 1-2 道真题回忆"开始，PR 流程走一遍就熟了。
 
-详细流程见 [CONTRIBUTING.md](https://github.com/awuawuheiyohei/CCIE-HCIE_Jarvis/blob/main/docs/CONTRIBUTING.md)。
+详细流程见 [CONTRIBUTING.md](https://github.com/awuawuheiyohei/21-CCIE-HCIE/blob/main/docs/CONTRIBUTING.md)。
 
 ---
 
@@ -91,10 +91,10 @@ knowledge/
 
 ## 💬 怎么交流？
 
-- **题目错误 / 解析争议** → 开 [Issue](https://github.com/awuawuheiyohei/CCIE-HCIE_Jarvis/issues) 用 `.github/ISSUE_TEMPLATE/bug.md` 模板
-- **新题收录申请** → 开 [Issue](https://github.com/awuawuheiyohei/CCIE-HCIE_Jarvis/issues) 用 `.github/ISSUE_TEMPLATE/question.md` 模板
+- **题目错误 / 解析争议** → 开 [Issue](https://github.com/awuawuheiyohei/21-CCIE-HCIE/issues) 用 `.github/ISSUE_TEMPLATE/bug.md` 模板
+- **新题收录申请** → 开 [Issue](https://github.com/awuawuheiyohei/21-CCIE-HCIE/issues) 用 `.github/ISSUE_TEMPLATE/question.md` 模板
 - **备考经验 / 心得** → 在本 **Discussions** 里发贴
-- **想贡献内容** → 直接发 [PR](https://github.com/awuawuheiyohei/CCIE-HCIE_Jarvis/pulls)
+- **想贡献内容** → 直接发 [PR](https://github.com/awuawuheiyohei/21-CCIE-HCIE/pulls)
 
 ---
 
@@ -116,7 +116,7 @@ knowledge/
 
 ## 📝 发布步骤
 
-1. 打开 https://github.com/awuawuheiyohei/CCIE-HCIE_Jarvis/discussions
+1. 打开 https://github.com/awuawuheiyohei/21-CCIE-HCIE/discussions
 2. 点击 **"New discussion"** 按钮
 3. 分类选 **📣 Announcements**
 4. 标题填：`📌 仓库使用说明 + 贡献者欢迎帖`
@@ -124,4 +124,4 @@ knowledge/
 6. 右侧面板点 **"Publish"**
 7. 发布后，点开帖子右上角 `···` → **"Pin discussion"** 置顶
 
-> ⚠️ 提示：markdown 里的相对路径（如 `docs/...`）在 Discussions 里点不开，**要改成完整 URL**（`https://github.com/awuawuheiyohei/CCIE-HCIE_Jarvis/blob/main/docs/...`）。我已经帮你转好了。
+> ⚠️ 提示：markdown 里的相对路径（如 `docs/...`）在 Discussions 里点不开，**要改成完整 URL**（`https://github.com/awuawuheiyohei/21-CCIE-HCIE/blob/main/docs/...`）。我已经帮你转好了。
