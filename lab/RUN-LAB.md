@@ -28,7 +28,7 @@ bash -c "$(curl -sL https://get-containerlab.dev)"   # Linux
 
 ```bash
 # 1. 进项目目录
-cd /Users/jiangwenrui/Downloads/mass/CCIE-HCIE/lab/clab
+cd /Users/jiangwenrui/Downloads/mass/21-CCIE-HCIE/lab/clab
 
 # 2. 部署（首次会拉 frrouting/frr 镜像，~100MB）
 sudo clab deploy
